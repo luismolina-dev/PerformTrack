@@ -2,7 +2,6 @@ package com.app.performtrackapi.services.Department;
 
 import com.app.performtrackapi.dtos.Department.DepartmentDto;
 import com.app.performtrackapi.entities.Department;
-import com.app.performtrackapi.entities.User;
 import com.app.performtrackapi.exceptions.BadRequestException;
 import com.app.performtrackapi.exceptions.ResourceNotFound;
 import com.app.performtrackapi.mappers.DepartmentMapper;
