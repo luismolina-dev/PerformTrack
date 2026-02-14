@@ -1,4 +1,4 @@
-package com.app.performtrackapi.services.Jwt;
+package com.app.performtrackapi.security;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -19,7 +19,7 @@ import java.io.IOException;
 @Component
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
-    private final JwtService jwtService;
+    private final JwtToken jwtToken;
     private final UserDetailsService userDetailsService;
 
     @Override
@@ -41,14 +41,14 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         // 2. Extract the token
         jwt = authHeader.substring(7);
-        userEmail = jwtService.extractEmail(jwt);
+        userEmail = jwtToken.extractEmail(jwt);
 
         // 3. If there is an email and the user is not authenticated in the context
         if (userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             UserDetails userDetails = this.userDetailsService.loadUserByUsername(userEmail);
 
             // 4. Validate if the token is valid
-            if (jwtService.validateToken(jwt, userDetails)) {
+            if (jwtToken.validateToken(jwt, userDetails)) {
                 UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
                         userDetails,
                         null,

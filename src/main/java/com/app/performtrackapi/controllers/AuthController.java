@@ -3,7 +3,7 @@ package com.app.performtrackapi.controllers;
 import com.app.performtrackapi.dtos.Auth.AuthRequest;
 import com.app.performtrackapi.dtos.Auth.AuthResponse;
 import com.app.performtrackapi.dtos.User.UserResponseDto;
-import com.app.performtrackapi.services.Jwt.JwtService;
+import com.app.performtrackapi.security.JwtToken;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -22,13 +22,13 @@ public class AuthController {
 
     private final AuthenticationManager authenticationManager;
 
-    private final JwtService jwtService;
+    private final JwtToken jwtToken;
 
     private final userService userService;
 
-    public AuthController(AuthenticationManager authenticationManager, JwtService jwtService, userService userService) {
+    public AuthController(AuthenticationManager authenticationManager, JwtToken jwtToken, userService userService) {
         this.authenticationManager = authenticationManager;
-        this.jwtService = jwtService;
+        this.jwtToken = jwtToken;
         this.userService = userService;
     }
 
@@ -40,7 +40,7 @@ public class AuthController {
 
         UserDetails userDetails = (UserDetails) auth.getPrincipal();
         assert userDetails != null;
-        String jwt = jwtService.generateToken(userDetails);
+        String jwt = jwtToken.generateToken(userDetails);
         UserResponseDto userResponseDto = userService.getUserByEmail(authRequest.getEmail());
 
         AuthResponse authResponse = new AuthResponse();
