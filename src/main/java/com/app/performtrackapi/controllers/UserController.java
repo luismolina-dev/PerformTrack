@@ -27,14 +27,14 @@ public class UserController {
     }
 
     @PatchMapping("{id}")
-    public ResponseEntity<UserResponseDto> userUpdate(@PathVariable("id") UUID id,
+    public ResponseEntity<UserResponseDto> userUpdate(@PathVariable("id") UUID userId,
             @RequestBody UserUpdateDto userUpdateDto) {
-        return ResponseEntity.ok(userService.updateUser(id, userUpdateDto));
+        return ResponseEntity.ok(userService.updateUser(userId, userUpdateDto));
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<Void> userDelete(@PathVariable("id") UUID id) {
-        userService.deleteUser(id);
+    public ResponseEntity<Void> userDelete(@PathVariable("id") UUID userId) {
+        userService.deleteUser(userId);
         return ResponseEntity.noContent().build();
     }
 }
