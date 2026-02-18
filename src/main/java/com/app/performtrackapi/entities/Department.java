@@ -22,4 +22,7 @@ public class Department {
     @Column(name = "name", unique = true)
     private String name;
 
+    @OneToMany(mappedBy = "department", cascade = CascadeType.ALL)
+    private List<Sub_department> subDepartments;
+
 }

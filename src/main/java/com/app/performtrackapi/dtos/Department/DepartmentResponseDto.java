@@ -1,6 +1,6 @@
 package com.app.performtrackapi.dtos.Department;
 
-import com.app.performtrackapi.dtos.Sub_department.SubDepartmentResponseDto;
+import com.app.performtrackapi.dtos.Sub_department.SubDepartmentResponseListDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,4 +14,5 @@ import java.util.UUID;
 public class DepartmentResponseDto {
     private UUID id;
     private String name;
+    private List<SubDepartmentResponseListDto> subDepartments;
 }
