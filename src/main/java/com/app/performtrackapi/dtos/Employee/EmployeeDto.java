@@ -13,4 +13,5 @@ public class EmployeeDto {
     private UUID positionId;
     private String name;
     private UUID userId;
+    private Boolean first_year;
 }

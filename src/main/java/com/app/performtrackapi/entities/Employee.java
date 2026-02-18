@@ -31,4 +31,6 @@ public class Employee {
     @JoinColumn(name = "user_id", nullable = true)
     private User user;
 
+    @Column(name = "first_year", nullable = true)
+    private Boolean first_year;
 }

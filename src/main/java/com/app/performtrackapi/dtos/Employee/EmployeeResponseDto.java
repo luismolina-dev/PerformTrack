@@ -14,4 +14,5 @@ public class EmployeeResponseDto {
     private UUID positionId;
     private UUID userId;
     private String name;
+    private Boolean first_year;
 }

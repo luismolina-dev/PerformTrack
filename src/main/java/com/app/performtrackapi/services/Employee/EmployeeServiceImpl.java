@@ -64,6 +64,8 @@ public class EmployeeServiceImpl implements EmployeeService{
 
         employee.setName(employeeDto.getName());
 
+        employee.setFirst_year(employee.getFirst_year());
+
         Position position = positionRepository.findById(employeeDto.getPositionId())
                 .orElseThrow(() -> new BadRequestException("Position not found"));
         employee.setPosition(position);
@@ -87,6 +89,10 @@ public class EmployeeServiceImpl implements EmployeeService{
 
         if (employeeDto.getName() != null) {
             employee.setName(employeeDto.getName());
+        }
+
+        if (employeeDto.getFirst_year() != null) {
+            employee.setFirst_year(employeeDto.getFirst_year());
         }
 
         if (employeeDto.getPositionId() != null) {
