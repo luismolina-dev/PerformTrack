@@ -12,6 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -74,5 +75,10 @@ public class userServiceImpl implements userService {
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new ResourceNotFound("User not found with email: " + email));
         return userMapper.toResponseDto(user);
+    }
+
+    @Override
+    public List<UserResponseDto> getAllUser() {
+        return  userRepository.findAll().stream().map(userMapper::toResponseDto).toList();
     }
 }
