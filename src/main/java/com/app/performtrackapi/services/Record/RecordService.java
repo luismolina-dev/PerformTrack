@@ -2,7 +2,6 @@ package com.app.performtrackapi.services.Record;
 
 import com.app.performtrackapi.dtos.Record.RecordDto;
 import com.app.performtrackapi.dtos.Record.RecordResponseDto;
-import com.app.performtrackapi.entities.Status;
 
 import java.util.List;
 import java.util.UUID;
