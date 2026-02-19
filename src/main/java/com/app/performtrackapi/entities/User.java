@@ -22,13 +22,11 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Column(name = "email", unique = true)
+    @Column(unique = true)
     private String email;
 
-    @Column(name = "password")
     private String password;
 
-    @Column(name = "role")
     @Enumerated(EnumType.STRING)
     private Role role;
 

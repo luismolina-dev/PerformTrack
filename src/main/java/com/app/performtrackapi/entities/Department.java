@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity
-@Table(name = "department")
 @Builder
 @Setter
 @Getter
@@ -19,7 +18,7 @@ public class Department {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Column(name = "name", unique = true)
+    @Column(unique = true)
     private String name;
 
     @OneToMany(mappedBy = "department", cascade = CascadeType.ALL)

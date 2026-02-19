@@ -6,7 +6,6 @@ import lombok.*;
 import java.util.UUID;
 
 @Entity
-@Table(name = "sub_department")
 @Builder
 @Setter
 @Getter
@@ -18,9 +17,8 @@ public class Sub_department {
     private UUID id;
 
     @ManyToOne
-    @JoinColumn(name = "department_id")
     private Department department;
 
-    @Column(name = "name", unique = true)
+    @Column(unique = true)
     private String name;
 }

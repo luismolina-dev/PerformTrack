@@ -9,7 +9,6 @@ import lombok.Setter;
 import java.util.UUID;
 
 @Entity
-@Table(name = "question")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -19,10 +18,8 @@ public class Question {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Column(name = "question")
     private String question;
 
     @ManyToOne
-    @JoinColumn(name = "category_id")
     private Category category;
 }

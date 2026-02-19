@@ -6,7 +6,6 @@ import lombok.*;
 import java.util.UUID;
 
 @Entity
-@Table(name = "position")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -18,13 +17,12 @@ public class Position {
     private UUID id;
 
     @ManyToOne
-    @JoinColumn(name = "department_id")
     private Department department;
 
     @ManyToOne(optional = true)
-    @JoinColumn(name = "subdepartment_id", nullable = true)
+    @JoinColumn(nullable = true)
     private Sub_department subDepartment;
 
-    @Column(name = "name", unique = true)
+    @Column(unique = true)
     private String name;
 }

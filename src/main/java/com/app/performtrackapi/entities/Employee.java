@@ -9,7 +9,6 @@ import lombok.Setter;
 import java.util.UUID;
 
 @Entity
-@Table(name = "employee")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -21,16 +20,12 @@ public class Employee {
     private UUID id;
 
     @ManyToOne
-    @JoinColumn(name = "position_id")
     private Position position;
 
-    @Column(name = "name")
     private String name;
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "user_id", nullable = true)
     private User user;
 
-    @Column(name = "first_year", nullable = true)
     private Boolean first_year;
 }
