@@ -9,11 +9,11 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface AnswerMapper {
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "question", ignore = true)
-    @Mapping(target = "record", ignore = true)
+    @Mapping(target = "questionId", ignore = true)
+    @Mapping(target = "recordId", ignore = true)
     Answer toEntity(AnswerDto answer);
 
-    @Mapping(source = "question.id", target = "questionId")
-    @Mapping(source = "record.id", target = "recordId")
+    @Mapping(source = "questionId.id", target = "questionId")
+    @Mapping(source = "recordId.id", target = "recordId")
     AnswerResponseDto toRespondDto(Answer answer);
 }
