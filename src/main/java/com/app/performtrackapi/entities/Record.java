@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -41,4 +42,7 @@ public class Record {
     private String technical_training;
 
     private Status status;
+
+    @OneToMany
+    private List<Answer> answers;
 }

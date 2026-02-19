@@ -6,7 +6,7 @@ import com.app.performtrackapi.entities.Record;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses =  {AnswerMapper.class})
 public interface RecordMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "evaluation", ignore = true)
