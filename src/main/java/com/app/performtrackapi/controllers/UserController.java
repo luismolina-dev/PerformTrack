@@ -3,7 +3,7 @@ package com.app.performtrackapi.controllers;
 import com.app.performtrackapi.dtos.User.UserCreateDto;
 import com.app.performtrackapi.dtos.User.UserResponseDto;
 import com.app.performtrackapi.dtos.User.UserUpdateDto;
-import com.app.performtrackapi.services.User.userService;
+import com.app.performtrackapi.services.User.UserService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,9 +16,9 @@ import java.util.UUID;
 @RequestMapping("/api/users")
 public class UserController {
 
-    private final userService userService;
+    private final UserService userService;
 
-    public UserController(userService userService) {
+    public UserController(UserService userService) {
         this.userService = userService;
     }
 

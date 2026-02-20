@@ -2,10 +2,12 @@ package com.app.performtrackapi.services.Evaluation;
 
 import com.app.performtrackapi.dtos.Evaluation.EvaluationDto;
 import com.app.performtrackapi.dtos.Evaluation.EvaluationResponseDto;
+import com.app.performtrackapi.entities.Employee;
 import com.app.performtrackapi.entities.Evaluation;
 import com.app.performtrackapi.entities.Position;
 import com.app.performtrackapi.exceptions.ResourceNotFound;
 import com.app.performtrackapi.mappers.EvaluationMapper;
+import com.app.performtrackapi.repositories.EmployeeRepository;
 import com.app.performtrackapi.repositories.EvaluationRepository;
 import com.app.performtrackapi.repositories.PositionRepository;
 import org.springframework.stereotype.Service;
@@ -14,16 +16,18 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-public class evaluationServiceImpl implements evaluationService{
+public class EvaluationServiceImpl implements EvaluationService {
 
     private final EvaluationRepository evaluationRepository;
     private final EvaluationMapper evaluationMapper;
     private final PositionRepository positionRepository;
+    private final EmployeeRepository employeeRepository;
 
-    public evaluationServiceImpl(EvaluationRepository evaluationRepository, EvaluationMapper evaluationMapper, PositionRepository positionRepository) {
+    public EvaluationServiceImpl(EvaluationRepository evaluationRepository, EvaluationMapper evaluationMapper, PositionRepository positionRepository, EmployeeRepository employeeRepository) {
         this.evaluationRepository = evaluationRepository;
         this.evaluationMapper = evaluationMapper;
         this.positionRepository = positionRepository;
+        this.employeeRepository = employeeRepository;
     }
 
     @Override
@@ -47,6 +51,26 @@ public class evaluationServiceImpl implements evaluationService{
         }
 
         Evaluation evaluation = evaluationRepository.findByPositionId(positionId);
+
+        return evaluationMapper.toResponseDto(evaluation);
+    }
+
+    @Override
+    public EvaluationResponseDto getEvaluationByEmployeeId(UUID id) {
+
+        Employee employee = employeeRepository.findById(id)
+                .orElseThrow(()-> new RuntimeException("Employee not found")
+                );
+
+        if (employee.getPosition() == null) {
+            throw new RuntimeException("Employee '" + employee.getName() + "' does not have a position assigned.");
+        }
+
+        Evaluation evaluation = evaluationRepository.findByPositionId(employee.getPosition().getId());
+
+        if (evaluation == null) {
+            throw new ResourceNotFound("No evaluation template found for position: " + employee.getPosition().getName());
+        }
 
         return evaluationMapper.toResponseDto(evaluation);
     }

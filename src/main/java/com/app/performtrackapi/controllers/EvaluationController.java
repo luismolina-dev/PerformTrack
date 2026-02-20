@@ -2,7 +2,7 @@ package com.app.performtrackapi.controllers;
 
 import com.app.performtrackapi.dtos.Evaluation.EvaluationDto;
 import com.app.performtrackapi.dtos.Evaluation.EvaluationResponseDto;
-import com.app.performtrackapi.services.Evaluation.evaluationService;
+import com.app.performtrackapi.services.Evaluation.EvaluationService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,14 +14,19 @@ import java.util.UUID;
 @RequestMapping("/api/evaluation")
 public class EvaluationController {
 
-    private final evaluationService evaluationService;
-    public EvaluationController(evaluationService evaluationService) {
+    private final EvaluationService evaluationService;
+    public EvaluationController(EvaluationService evaluationService) {
         this.evaluationService = evaluationService;
     }
 
     @GetMapping("/{positionId}")
     public ResponseEntity<EvaluationResponseDto> getEvaluationByPositionId(@PathVariable UUID positionId){
         return ResponseEntity.ok(evaluationService.getEvaluationByPositionId(positionId));
+    }
+
+    @GetMapping("/employee/{employeeId}")
+    public ResponseEntity<EvaluationResponseDto> getEvaluationByEmployeeId(@PathVariable UUID employeeId){
+        return ResponseEntity.ok(evaluationService.getEvaluationByEmployeeId(employeeId));
     }
 
     @GetMapping("/")

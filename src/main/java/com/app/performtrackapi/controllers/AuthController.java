@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.app.performtrackapi.services.User.userService;
+import com.app.performtrackapi.services.User.UserService;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -24,9 +24,9 @@ public class AuthController {
 
     private final JwtToken jwtToken;
 
-    private final userService userService;
+    private final UserService userService;
 
-    public AuthController(AuthenticationManager authenticationManager, JwtToken jwtToken, userService userService) {
+    public AuthController(AuthenticationManager authenticationManager, JwtToken jwtToken, UserService userService) {
         this.authenticationManager = authenticationManager;
         this.jwtToken = jwtToken;
         this.userService = userService;

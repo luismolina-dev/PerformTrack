@@ -5,7 +5,7 @@ import com.app.performtrackapi.dtos.Category.CategoryResponseDto;
 
 import java.util.UUID;
 
-public interface categoryService {
+public interface CategoryService {
     CategoryResponseDto getCategoryById(UUID id);
     CategoryResponseDto createCategory(CategoryDto categoryDto);
     CategoryResponseDto updateCategory(UUID id, CategoryDto categoryDto);

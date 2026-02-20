@@ -17,14 +17,14 @@ import java.util.UUID;
 
 @Service
 @Transactional
-public class sub_departmentServiceImpl implements sub_departmentService{
+public class Sub_departmentServiceImpl implements Sub_departmentService {
 
     private final SubDepartmentRepository subDepartmentRepository;
     private final SubDepartmentMapper subDepartmentMapper;
     private final DepartmentRepository departmentRepository;
 
 
-    public sub_departmentServiceImpl(SubDepartmentRepository subDepartmentRepository, SubDepartmentMapper subDepartmentMapper, DepartmentRepository departmentRepository) {
+    public Sub_departmentServiceImpl(SubDepartmentRepository subDepartmentRepository, SubDepartmentMapper subDepartmentMapper, DepartmentRepository departmentRepository) {
         this.subDepartmentRepository = subDepartmentRepository;
         this.subDepartmentMapper = subDepartmentMapper;
         this.departmentRepository = departmentRepository;

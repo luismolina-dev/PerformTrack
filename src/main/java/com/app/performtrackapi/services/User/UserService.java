@@ -7,7 +7,7 @@ import com.app.performtrackapi.dtos.User.UserUpdateDto;
 import java.util.List;
 import java.util.UUID;
 
-public interface userService {
+public interface UserService {
     UserResponseDto getUserByEmail(String email);
     List<UserResponseDto> getAllUser();
     UserResponseDto createUser(UserCreateDto userCreateDto);

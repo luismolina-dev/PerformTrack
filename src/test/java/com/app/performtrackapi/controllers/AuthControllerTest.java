@@ -4,7 +4,7 @@ import com.app.performtrackapi.dtos.Auth.AuthRequest;
 import com.app.performtrackapi.dtos.Auth.AuthResponse;
 import com.app.performtrackapi.dtos.User.UserResponseDto;
 import com.app.performtrackapi.security.JwtToken;
-import com.app.performtrackapi.services.User.userService;
+import com.app.performtrackapi.services.User.UserService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -30,7 +30,7 @@ class AuthControllerTest {
     private JwtToken jwtToken;
 
     @Mock
-    private userService userService;
+    private UserService userService;
 
     @InjectMocks
     private AuthController authController;

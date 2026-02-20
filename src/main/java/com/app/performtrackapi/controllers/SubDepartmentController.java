@@ -2,7 +2,7 @@ package com.app.performtrackapi.controllers;
 
 import com.app.performtrackapi.dtos.Sub_department.SubDepartmentDto;
 import com.app.performtrackapi.dtos.Sub_department.SubDepartmentResponseDto;
-import com.app.performtrackapi.services.Sub_department.sub_departmentService;
+import com.app.performtrackapi.services.Sub_department.Sub_departmentService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,8 +14,8 @@ import java.util.UUID;
 @RequestMapping("/api/sub-department")
 public class SubDepartmentController {
 
-    private final sub_departmentService sub_departmentService;
-    public SubDepartmentController(sub_departmentService sub_departmentService) {
+    private final Sub_departmentService sub_departmentService;
+    public SubDepartmentController(Sub_departmentService sub_departmentService) {
         this.sub_departmentService = sub_departmentService;
     }
 

@@ -2,7 +2,7 @@ package com.app.performtrackapi.controllers;
 
 import com.app.performtrackapi.dtos.Question.QuestionDto;
 import com.app.performtrackapi.dtos.Question.QuestionResponseDto;
-import com.app.performtrackapi.services.Question.questionService;
+import com.app.performtrackapi.services.Question.QuestionService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,8 +13,8 @@ import java.util.UUID;
 @RequestMapping("/api/questions")
 public class QuestionController {
 
-    private final questionService questionService;
-    public QuestionController(questionService questionService) {
+    private final QuestionService questionService;
+    public QuestionController(QuestionService questionService) {
         this.questionService = questionService;
     }
 

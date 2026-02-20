@@ -12,13 +12,13 @@ import org.springframework.stereotype.Service;
 import java.util.UUID;
 
 @Service
-public class questionServiceImpl implements questionService{
+public class QuestionServiceImpl implements QuestionService {
 
     private final QuestionRepository questionRepository;
     private final QuestionMapper questionMapper;
     private final CategoryRepository categoryRepository;
 
-    public questionServiceImpl(QuestionRepository questionRepository, QuestionMapper questionMapper, CategoryRepository categoryRepository) {
+    public QuestionServiceImpl(QuestionRepository questionRepository, QuestionMapper questionMapper, CategoryRepository categoryRepository) {
         this.questionRepository = questionRepository;
         this.questionMapper = questionMapper;
         this.categoryRepository = categoryRepository;

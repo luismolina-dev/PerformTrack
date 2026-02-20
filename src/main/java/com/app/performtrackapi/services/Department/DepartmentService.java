@@ -6,7 +6,7 @@ import com.app.performtrackapi.dtos.Department.DepartmentResponseDto;
 import java.util.List;
 import java.util.UUID;
 
-public interface departmentService {
+public interface DepartmentService {
     DepartmentResponseDto getDepartmentById(UUID id);
     DepartmentResponseDto createDepartment(DepartmentDto departmentDto);
     DepartmentResponseDto updateDepartment(UUID id, DepartmentDto departmentDto);
