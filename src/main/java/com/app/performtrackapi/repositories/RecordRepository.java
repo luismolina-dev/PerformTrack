@@ -11,6 +11,11 @@ import java.util.UUID;
 @Repository
 public interface RecordRepository extends JpaRepository<Record, UUID> {
     Record findByEmployeeId(UUID employeeId);
+
     List<Record> findByPeriod(String period, Status status);
+
     List<Record> findByStatus(Status status);
+
+    List<Record> findByEmployee_Position_Department_IdAndPeriodAndStatus(UUID departmentId, String period,
+            Status status);
 }
