@@ -3,8 +3,9 @@ package com.app.performtrackapi.services.Record;
 import com.app.performtrackapi.dtos.Evaluation.EvaluationWithProgress;
 import com.app.performtrackapi.dtos.Record.RecordDto;
 import com.app.performtrackapi.dtos.Record.RecordResponseDto;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
-import java.util.List;
 import java.util.UUID;
 
 public interface RecordService {
@@ -18,7 +19,7 @@ public interface RecordService {
 
     EvaluationWithProgress getPendingRecordByEmployeeId(UUID employeeId);
 
-    List<RecordResponseDto> getAllCompleteRecords(String period);
+    Page<RecordResponseDto> getAllCompleteRecords(String period, Pageable pageable);
 
     void deleteRecord(UUID id);
 }

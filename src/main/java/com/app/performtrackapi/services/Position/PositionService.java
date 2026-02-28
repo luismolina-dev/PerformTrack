@@ -2,16 +2,17 @@ package com.app.performtrackapi.services.Position;
 
 import com.app.performtrackapi.dtos.Position.PositionDto;
 import com.app.performtrackapi.dtos.Position.PositionResponseDto;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
-import java.util.List;
 import java.util.UUID;
 
 public interface PositionService {
     PositionResponseDto getPositionById(UUID id);
 
-    List<PositionResponseDto> getAllPosition();
+    Page<PositionResponseDto> getAllPosition(Pageable pageable);
 
-    List<PositionResponseDto> getAllPositionByDepartmentId(UUID departmentId);
+    Page<PositionResponseDto> getAllPositionByDepartmentId(UUID departmentId, Pageable pageable);
 
     PositionResponseDto createPosition(PositionDto positionDto);
 

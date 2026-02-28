@@ -10,9 +10,10 @@ import com.app.performtrackapi.mappers.EmployeeMapper;
 import com.app.performtrackapi.repositories.EmployeeRepository;
 import com.app.performtrackapi.repositories.PositionRepository;
 import com.app.performtrackapi.repositories.UserRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -51,10 +52,9 @@ public class EmployeeServiceImpl implements EmployeeService{
     }
 
     @Override
-    public List<EmployeeResponseDto> getAllEmployee() {
-        return employeeRepository.findAll()
-                .stream()
-                .map(employeeMapper::toResponseDto).toList();
+    public Page<EmployeeResponseDto> getAllEmployee(Pageable pageable) {
+        return employeeRepository.findAll(pageable)
+                .map(employeeMapper::toResponseDto);
     }
 
     @Override

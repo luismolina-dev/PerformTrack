@@ -4,11 +4,12 @@ import com.app.performtrackapi.dtos.Evaluation.EvaluationWithProgress;
 import com.app.performtrackapi.dtos.Record.RecordDto;
 import com.app.performtrackapi.dtos.Record.RecordResponseDto;
 import com.app.performtrackapi.services.Record.RecordService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -37,8 +38,13 @@ public class RecordController {
     }
 
     @GetMapping("/")
-    public ResponseEntity<List<RecordResponseDto>> getAllCompleteRecords(@RequestParam(required = false) String period){
-        return ResponseEntity.ok(recordService.getAllCompleteRecords(period));
+    public ResponseEntity<Page<RecordResponseDto>> getAllCompleteRecords(
+            @RequestParam(required = false) String period,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size
+    ){
+        Pageable pageable = Pageable.ofSize(size).withPage(page);
+        return ResponseEntity.ok(recordService.getAllCompleteRecords(period, pageable));
     }
 
     @PostMapping("/")

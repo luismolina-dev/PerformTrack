@@ -1,6 +1,5 @@
 package com.app.performtrackapi.services.Record;
 
-import com.app.performtrackapi.dtos.Answer.AnswerDto;
 import com.app.performtrackapi.dtos.Evaluation.EvaluationResponseDto;
 import com.app.performtrackapi.dtos.Evaluation.EvaluationWithProgress;
 import com.app.performtrackapi.dtos.Category.CategoryWithProgressDto;
@@ -22,6 +21,8 @@ import java.util.ArrayList;
 
 import com.app.performtrackapi.services.Evaluation.EvaluationService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -212,14 +213,15 @@ public class RecordServiceImpl implements RecordService {
     }
 
     @Override
-    public List<RecordResponseDto> getAllCompleteRecords(String period) {
+    public Page<RecordResponseDto> getAllCompleteRecords(String period, Pageable pageable) {
 
         if (period != null) {
-            return recordRepository.findByPeriod(period, Status.completed).stream().map(recordMapper::toResponseDto)
-                    .toList();
+            return recordRepository.findByPeriod(period, Status.completed, pageable)
+                    .map(recordMapper::toResponseDto);
         }
 
-        return recordRepository.findByStatus(Status.completed).stream().map(recordMapper::toResponseDto).toList();
+        return recordRepository.findByStatus(Status.completed, pageable)
+                .map(recordMapper::toResponseDto);
     }
 
     @Override

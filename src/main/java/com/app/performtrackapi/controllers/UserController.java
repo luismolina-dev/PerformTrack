@@ -5,11 +5,12 @@ import com.app.performtrackapi.dtos.User.UserResponseDto;
 import com.app.performtrackapi.dtos.User.UserUpdateDto;
 import com.app.performtrackapi.services.User.UserService;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -23,8 +24,12 @@ public class UserController {
     }
 
     @GetMapping("/")
-    public ResponseEntity<List<UserResponseDto>> getAllUser(){
-        return ResponseEntity.ok(userService.getAllUser());
+    public ResponseEntity<Page<UserResponseDto>> getAllUser(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size
+    ){
+        Pageable pageable = Pageable.ofSize(size).withPage(page);
+        return ResponseEntity.ok(userService.getAllUser(pageable));
     }
 
     @PostMapping("/")

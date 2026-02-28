@@ -3,10 +3,11 @@ package com.app.performtrackapi.controllers;
 import com.app.performtrackapi.dtos.Employee.EmployeeDto;
 import com.app.performtrackapi.dtos.Employee.EmployeeResponseDto;
 import com.app.performtrackapi.services.Employee.EmployeeService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -30,9 +31,12 @@ public class EmployeeController {
     }
 
     @GetMapping("/")
-    public ResponseEntity<List<EmployeeResponseDto>> getAllEmployees(){
-        List<EmployeeResponseDto> employee = employeeService.getAllEmployee();
-        return ResponseEntity.ok(employee);
+    public ResponseEntity<Page<EmployeeResponseDto>> getAllEmployees(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size
+    ){
+        Pageable pageable = Pageable.ofSize(size).withPage(page);
+        return ResponseEntity.ok(employeeService.getAllEmployee(pageable));
     }
 
     @PostMapping("/")

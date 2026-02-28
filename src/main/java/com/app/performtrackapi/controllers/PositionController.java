@@ -3,11 +3,12 @@ package com.app.performtrackapi.controllers;
 import com.app.performtrackapi.dtos.Position.PositionDto;
 import com.app.performtrackapi.dtos.Position.PositionResponseDto;
 import com.app.performtrackapi.services.Position.PositionService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -21,8 +22,12 @@ public class PositionController {
     }
 
     @GetMapping("/")
-    public ResponseEntity<List<PositionResponseDto>> getAllPosition() {
-        return ResponseEntity.ok(positionService.getAllPosition());
+    public ResponseEntity<Page<PositionResponseDto>> getAllPosition(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size
+    ) {
+        Pageable pageable = Pageable.ofSize(size).withPage(page);
+        return ResponseEntity.ok(positionService.getAllPosition(pageable));
     }
 
     @GetMapping("/{positionId}")
@@ -31,8 +36,13 @@ public class PositionController {
     }
 
     @GetMapping("/department/{departmentId}")
-    public ResponseEntity<List<PositionResponseDto>> getAllPositionByDepartmentId(@PathVariable UUID departmentId){
-        return ResponseEntity.ok(positionService.getAllPositionByDepartmentId(departmentId));
+    public ResponseEntity<Page<PositionResponseDto>> getAllPositionByDepartmentId(
+            @PathVariable UUID departmentId,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size
+    ){
+        Pageable pageable = Pageable.ofSize(size).withPage(page);
+        return ResponseEntity.ok(positionService.getAllPositionByDepartmentId(departmentId, pageable));
     }
 
     @PostMapping("/")

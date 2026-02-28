@@ -8,11 +8,12 @@ import com.app.performtrackapi.mappers.UserMapper;
 import com.app.performtrackapi.repositories.UserRepository;
 import com.app.performtrackapi.exceptions.BadRequestException;
 import com.app.performtrackapi.exceptions.ResourceNotFound;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -78,7 +79,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserResponseDto> getAllUser() {
-        return  userRepository.findAll().stream().map(userMapper::toResponseDto).toList();
+    public Page<UserResponseDto> getAllUser(Pageable pageable) {
+        return  userRepository.findAll(pageable)
+                .map(userMapper::toResponseDto);
     }
 }

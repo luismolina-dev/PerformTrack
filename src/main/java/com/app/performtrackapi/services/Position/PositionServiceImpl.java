@@ -10,9 +10,10 @@ import com.app.performtrackapi.mappers.PositionMapper;
 import com.app.performtrackapi.repositories.DepartmentRepository;
 import com.app.performtrackapi.repositories.PositionRepository;
 import com.app.performtrackapi.repositories.SubDepartmentRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -40,24 +41,20 @@ public class PositionServiceImpl implements PositionService {
     }
 
     @Override
-    public List<PositionResponseDto> getAllPosition() {
-        return positionRepository.findAll()
-                .stream()
-                .map(positionMapper::toResponseDto)
-                .toList();
+    public Page<PositionResponseDto> getAllPosition(Pageable pageable) {
+        return positionRepository.findAll(pageable)
+                .map(positionMapper::toResponseDto);
     }
 
     @Override
-    public List<PositionResponseDto> getAllPositionByDepartmentId(UUID departmentId) {
+    public Page<PositionResponseDto> getAllPositionByDepartmentId(UUID departmentId, Pageable pageable) {
 
        if (!departmentRepository.existsById(departmentId)) {
            throw new BadRequestException("Department not found");
        }
 
-        return positionRepository.findAllByDepartmentId(departmentId)
-                .stream()
-                .map(positionMapper::toResponseDto)
-                .toList();
+        return positionRepository.findAllByDepartmentId(departmentId, pageable)
+                .map(positionMapper::toResponseDto);
     }
 
     @Override
